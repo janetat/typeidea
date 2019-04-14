@@ -2,14 +2,23 @@ from django.contrib import admin
 from django.shortcuts import reverse
 from django.utils.html import format_html
 
+from .admin_forms import PostAdminForm
 from .admin_filters import CategoryOwnerFilter
 from .models import Post, Category, Tag
+
+
+class PostInline(admin.StackedInline):  # admin.TabularInline
+    """ 对于需要在一个页面内完成两个关联模型编辑编辑的需求，inline admin非常合适 """
+    fields = ('title', 'desc')
+    extra = 2
+    model = Post
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'status', 'is_nav', 'created_time', 'post_count', 'owner')
     fields = ('name', 'status', 'is_nav')
+    inlines = (PostInline,)
 
     def post_count(self, obj):
         return obj.post_set.count()
@@ -41,11 +50,14 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    # TODO 新增 文章时候 分类、标签只显示当前用户的
+    # TODO 新增/编辑文章时候 分类、标签只显示当前用户的
     list_display = [
         'title', 'category', 'status',
         'created_time', 'owner', 'operator',
     ]
+
+    form = PostAdminForm
+
     list_display_links = []
     list_filter = [CategoryOwnerFilter]
 
