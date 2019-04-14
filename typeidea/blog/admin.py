@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.shortcuts import reverse
 from django.utils.html import format_html
+
+from .admin_filters import CategoryOwnerFilter
 from .models import Post, Category, Tag
 
 
@@ -33,11 +35,10 @@ class TagAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     list_display = [
         'title', 'category', 'status',
-        'created_time', 'operator'
+        'created_time', 'owner', 'operator'
     ]
     list_display_links = []
-
-    list_filter = ['category', ]
+    list_filter = [CategoryOwnerFilter]
 
     search_fields = ['title', 'category__name']
 
