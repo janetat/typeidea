@@ -53,15 +53,37 @@ class PostAdmin(admin.ModelAdmin):
 
     actions_on_top = True
     # actions_on_bottom = True
-
+    # filter_horizontal = ('tag', )
+    # filter_vertical = ('tag', )
     # save_on_top = True
-    fields = (
-        'category',
-        'title',
-        'desc',
-        'status',
-        'content',
-        'tag'
+    # fields = (
+    #     'category',
+    #     'title',
+    #     'desc',
+    #     'status',
+    #     'content',
+    #     'tag'
+    # )
+
+    fieldsets = (
+        ('基础配置', {
+            'description': '基础配置描述',
+            'fields': (
+                'title',
+                'category',
+                'status'
+            ),
+        }),
+        ('内容', {
+            'fields': (
+                'desc',
+                'content'
+            ),
+        }),
+        ('额外信息', {
+            'fields': ('tag',),
+            'classes': ('collapse',),
+        })
     )
 
     def operator(self, obj):
