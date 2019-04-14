@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.shortcuts import reverse
 from django.utils.html import format_html
 
+from typeidea.custom_site import custom_site
 from .admin_forms import PostAdminForm
 from .admin_filters import CategoryOwnerFilter
 from .models import Post, Category, Tag
@@ -14,7 +15,7 @@ class PostInline(admin.StackedInline):  # admin.TabularInline
     model = Post
 
 
-@admin.register(Category)
+@admin.register(Category, site=custom_site)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'status', 'is_nav', 'created_time', 'post_count', 'owner')
     fields = ('name', 'status', 'is_nav')
@@ -34,7 +35,7 @@ class CategoryAdmin(admin.ModelAdmin):
         return query_set.filter(owner=request.user)
 
 
-@admin.register(Tag)
+@admin.register(Tag, site=custom_site)
 class TagAdmin(admin.ModelAdmin):
     list_display = ('name', 'status', 'created_time', 'owner')
     fields = ('name', 'status')
@@ -48,7 +49,7 @@ class TagAdmin(admin.ModelAdmin):
         return query_set.filter(owner=request.user)
 
 
-@admin.register(Post)
+@admin.register(Post, site=custom_site)
 class PostAdmin(admin.ModelAdmin):
     # TODO 新增/编辑文章时候 分类、标签只显示当前用户的
     list_display = [
@@ -101,7 +102,7 @@ class PostAdmin(admin.ModelAdmin):
     def operator(self, obj):
         return format_html(
             '<a href="{}">编辑</a>',
-            reverse('admin:blog_post_change', args=(obj.id,))
+            reverse('cus_admin:blog_post_change', args=(obj.id,))
         )
 
     operator.short_description = '操作'
