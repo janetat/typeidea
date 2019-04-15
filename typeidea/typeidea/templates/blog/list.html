@@ -1,0 +1,14 @@
+<ul>
+{% for post in post_list %}
+    <li>
+        <a href="/post/{{ post_id }}">{{ post.title }}</a>
+        <div>
+            <span>作者： {{ post.owner }}</span>
+            <br/>
+            <span>分类： {{ post.category }}</span>
+        </div>
+        <p>{{ post.desc }}</p>
+        <hr/>
+    </li>
+{% endfor %}
+</ul>
