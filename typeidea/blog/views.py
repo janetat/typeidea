@@ -6,18 +6,25 @@ from .models import Post, Category, Tag
 
 # Create your views here.
 def post_list(request, category_id=None, tag_id=None):
-    post_list = []
-    if category_id:
-        post_list = Post.objects.filter(category=category_id, status=Post.STATUS_NORMAL, owner=request.user)
-    elif tag_id:
-        post_list = Post.objects.filter(tag=tag_id, status=Post.STATUS_NORMAL, owner=request.user)
+    tag = None
+    category = None
+
+    if tag_id:
+        post_list, tag = Post.get_by_tag(tag_id)
+    elif category_id:
+        post_list, category = Post.get_by_category(category_id)
     else:
-        post_list = Post.objects.filter(status=Post.STATUS_NORMAL, owner=request.user)
+        post_list = Post.latest_posts()
 
-    # TODO 模板中的post.category，是外键查询，每一条记录的请求都需要一次数据库访问来获取关联外键的问题。
-    # 例如列表页要展示10条数据，每一个关联外键查询都会产生一次数据库请求，即1+N问题。
+    context = {
+        'category': category,
+        'tag': tag,
+        'post_list': post_list
+    }
 
-    return render(request, 'blog/list.html', context={'post_list': post_list})
+    context.update(Category.get_navs())
+
+    return render(request, 'blog/list.html', context=context)
 
 
 def post_detail(request, post_id=None):
@@ -29,4 +36,10 @@ def post_detail(request, post_id=None):
     else:
         post = None
 
-    return render(request, 'blog/detail.html', context={'post': post})
+    context = {
+        'post': post
+    }
+
+    context.update(Category.get_navs())
+
+    return render(request, 'blog/detail.html', context=context)

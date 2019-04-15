@@ -14,7 +14,7 @@ from .models import Post, Category, Tag
 
 class PostInline(admin.StackedInline):  # admin.TabularInline
     """ 对于需要在一个页面内完成两个关联模型编辑编辑的需求，inline admin非常合适 """
-    fields = ('title', 'desc')
+    fields = ('title', 'desc', 'owner')
     extra = 2
     model = Post
 
