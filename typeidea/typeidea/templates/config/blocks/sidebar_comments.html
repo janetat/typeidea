@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sidebar_comments</title>
+</head>
+<body>
+    <ul>
+{% for comment in comments %}
+        <li>
+            <a href="/post/{{ comment.target_id }}">{{ comment.target.title }}</a>
+            <p>{{ comment.nickname }} : {{ comment.content }}</p>
+        </li>
+{% endfor %}
+    </ul>
+</body>
+</html>

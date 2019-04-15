@@ -35,6 +35,16 @@
 </ul>
 
 <hr>
+    <h1>侧边栏展示</h1>
+{% for sidebar in sidebars %}
+    <div>
+        <h4>{{ sidebar.title }}</h4>
+        <p>{{ sidebar.content_html }}</p>
+    </div>
+{% endfor %}
+
+
+<hr>
 <div>
     <h1>底部分类：</h1>
 {% for cate in categories %}

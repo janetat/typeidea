@@ -6,6 +6,7 @@ class BaseOwnerAdmin(admin.ModelAdmin):
     1.  自动补充各Model的owner字段
     2.  过滤queryset，只显示当前用户的数据
     """
+    exclude = ('owner', )
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
