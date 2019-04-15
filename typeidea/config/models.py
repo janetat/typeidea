@@ -24,6 +24,12 @@ class Link(models.Model):
 
 
 class SideBar(models.Model):
+    """
+        因为SideBar中不同类型对应着不同的数据源，所以一般有两种方式处理。本质是数据的封装。
+        方案1. 在Model层对数据做渲染，返回渲染的数据。 (通用性更好，避免View层逻辑较多，因为View层调整大，瘦的View层维护起来更容易)
+        方案2. 在View层做处理，不同的数据在不同的View层获取。
+
+    """
     DISPLAY_HTML = 1
     DISPLAY_LATEST = 2
     DISPLAY_HOT = 3
