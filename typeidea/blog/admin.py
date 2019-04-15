@@ -2,7 +2,9 @@ from django.contrib import admin
 from django.shortcuts import reverse
 from django.utils.html import format_html
 
+from typeidea.base_admin import BaseOwnerAdmin
 from typeidea.custom_site import custom_site
+
 from .admin_forms import PostAdminForm
 from .admin_filters import CategoryOwnerFilter
 from .models import Post, Category, Tag
@@ -16,7 +18,7 @@ class PostInline(admin.StackedInline):  # admin.TabularInline
 
 
 @admin.register(Category, site=custom_site)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(BaseOwnerAdmin):
     list_display = ('name', 'status', 'is_nav', 'created_time', 'post_count', 'owner')
     fields = ('name', 'status', 'is_nav')
     inlines = (PostInline,)
@@ -26,35 +28,19 @@ class CategoryAdmin(admin.ModelAdmin):
 
     post_count.short_description = '文章数量'
 
-    def save_model(self, request, obj, form, change):
-        obj.owner = request.user
-        return super().save_model(request, obj, form, change)
-
-    def get_queryset(self, request):
-        query_set = super().get_queryset(request)
-        return query_set.filter(owner=request.user)
-
 
 @admin.register(Tag, site=custom_site)
-class TagAdmin(admin.ModelAdmin):
+class TagAdmin(BaseOwnerAdmin):
     list_display = ('name', 'status', 'created_time', 'owner')
     fields = ('name', 'status')
 
-    def save_model(self, request, obj, form, change):
-        obj.owner = request.user
-        return super().save_model(request, obj, form, change)
-
-    def get_queryset(self, request):
-        query_set = super().get_queryset(request)
-        return query_set.filter(owner=request.user)
-
 
 @admin.register(Post, site=custom_site)
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(BaseOwnerAdmin):
     # TODO 新增/编辑文章时候 分类、标签只显示当前用户的
     list_display = [
         'title', 'category', 'status',
-        'created_time', 'owner', 'operator',
+        'created_time', 'owner', 'operator'
     ]
 
     form = PostAdminForm
@@ -106,11 +92,3 @@ class PostAdmin(admin.ModelAdmin):
         )
 
     operator.short_description = '操作'
-
-    def save_model(self, request, obj, form, change):
-        obj.owner = request.user
-        return super().save_model(request, obj, form, change)
-
-    def get_queryset(self, request):
-        query_set = super().get_queryset(request)
-        return query_set.filter(owner=request.user)
