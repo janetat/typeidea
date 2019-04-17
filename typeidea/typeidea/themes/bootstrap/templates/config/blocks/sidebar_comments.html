@@ -1,8 +1,10 @@
 <ul>
     {% for comment in comments %}
+    {% autoescape off %}
         <li>
             <a href="{{ comment.target }}">{{ comment.target.title }}</a>
             <span>{{ comment.nickname }} : {{ comment.content }}</span>
         </li>
+    {% endautoescape %}
     {% endfor %}
 </ul>

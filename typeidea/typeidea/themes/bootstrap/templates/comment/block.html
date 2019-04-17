@@ -17,7 +17,9 @@
             </div>
 
             <div class="comment-content">
-                {{ comment.content }}
+                {% autoescape off %}
+                    {{ comment.content }}
+                {% endautoescape %}
             </div>
         </li>
         {% endfor %}
