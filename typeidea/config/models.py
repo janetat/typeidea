@@ -22,6 +22,10 @@ class Link(models.Model):
     class Meta:
         verbose_name = verbose_name_plural = '友链'
 
+    @classmethod
+    def get_all_normal(cls):
+        return cls.objects.filter(status=cls.STATUS_NORMAL)
+
 
 class SideBar(models.Model):
     """

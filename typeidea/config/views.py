@@ -1,8 +1,10 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.views.generic import ListView
+
+from blog.views import CommonViewMixin
+from .models import Link
 
 
-# Create your views here.
-def links(request):
-    content = 'links'
-    return HttpResponse(content)
+class LinkListView(CommonViewMixin, ListView):
+    queryset = Link.get_all_normal()
+    template_name = 'config/links.html'
+    context_object_name = 'link_list'
