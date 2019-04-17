@@ -42,7 +42,7 @@ class PostAdmin(BaseOwnerAdmin):
     # TODO 新增/编辑文章时候 分类、标签只显示当前用户的
     list_display = [
         'title', 'category', 'status',
-        'created_time', 'owner', 'operator', 'pv'
+        'created_time', 'owner', 'operator', 'pv', 'uv'
     ]
 
     form = PostAdminForm
