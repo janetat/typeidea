@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 
 from blog.views import IndexView, CategoryView, TagView, PostDetailView, SearchView, AuthorView
+from blog.rss import LatestPostFeed
 from config.views import LinkListView
 from comment.views import CommentView
 
@@ -34,4 +35,5 @@ urlpatterns = [
     re_path(r'^comment/$', CommentView.as_view(), name='comment'),
     re_path(r'^search/$', SearchView.as_view(), name='search'),
     re_path(r'^author/(?P<owner_id>\d+)/$', AuthorView.as_view(), name='author'),
+    re_path(r'^rss|feed$', LatestPostFeed(), name='rss')
 ]
