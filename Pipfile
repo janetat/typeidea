@@ -8,6 +8,7 @@ bpython = "*"
 
 [packages]
 django = "~=2.2"
+mistune = "*"
 
 [requires]
 python_version = "3.7"
