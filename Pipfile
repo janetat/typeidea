@@ -9,6 +9,7 @@ bpython = "*"
 [packages]
 django = "~=2.2"
 mistune = "*"
+django-autocomplete-light = "*"
 xadmin = {file = "https://codeload.github.com/sshwsfc/xadmin/zip/django2"}
 
 [requires]

@@ -27,6 +27,7 @@ from blog.rss import LatestPostFeed
 from blog.sitemap import PostSiteMap
 
 from .custom_site import custom_site
+from .autocomplete import CategoryAutocompleteView, TagAutocompleteView
 
 urlpatterns = [
     path('super_admin/', admin.site.urls, name='super-admin'),
@@ -42,5 +43,7 @@ urlpatterns = [
     re_path(r'^search/$', SearchView.as_view(), name='search'),
     re_path(r'^author/(?P<owner_id>\d+)/$', AuthorView.as_view(), name='author'),
     re_path(r'^rss|feed$', LatestPostFeed(), name='rss'),
-    re_path(r'^sitemap\.xml$', sitemap_views.sitemap, {'sitemaps': {'posts': PostSiteMap}})
+    re_path(r'^sitemap\.xml$', sitemap_views.sitemap, {'sitemaps': {'posts': PostSiteMap}}),
+    re_path(r'^category-autocomplete/$', CategoryAutocompleteView.as_view(), name='category-autocomplete'),
+    re_path(r'^tag-autocomplete/$', TagAutocompleteView.as_view(), name='tag-autocomplete'),
 ]

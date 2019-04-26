@@ -32,17 +32,22 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'typeidea',
+    'blog',
+    'config',
+    'comment',
+
+    'dal',
+    'dal_select2',
+    'xadmin',
+    'crispy_forms',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'xadmin',
-    'crispy_forms',
-    'blog',
-    'config',
-    'comment',
 ]
 
 MIDDLEWARE = [
