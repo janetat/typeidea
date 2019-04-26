@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8f7910548201a29cecdf8948f5da7e57dba1ef31ea5c2af87e1abd2d20fecfc7"
+            "sha256": "149f51c6f349cabf182b174f659df5e323b8ebb7c1d4d692a801df55a52453d7"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -45,6 +45,9 @@
                 "sha256:7c3dca29c022744e95b547e867cee89f4fce4373f3549ccd8797d8eb52cdb873"
             ],
             "version": "==0.3.0"
+        },
+        "xadmin": {
+            "file": "https://codeload.github.com/sshwsfc/xadmin/zip/django2"
         }
     },
     "develop": {

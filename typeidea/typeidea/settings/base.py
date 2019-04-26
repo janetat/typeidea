@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'xadmin',
+    'crispy_forms',
     'blog',
     'config',
     'comment',
@@ -126,3 +128,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'themes', THEME, "static"),
 ]
+
+# xadmin
+XADMIN_TITLE = 'Typeidea管理后台'
+XADMIN_FOOTER_TITLE = 'powered by allen'

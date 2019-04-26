@@ -116,3 +116,4 @@ class AuthorView(IndexView):
         queryset = super().get_queryset()
         author_id = self.kwargs.get('owner_id')
         return queryset.filter(owner_id=author_id)
+

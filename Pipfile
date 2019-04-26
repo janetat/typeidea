@@ -9,6 +9,7 @@ bpython = "*"
 [packages]
 django = "~=2.2"
 mistune = "*"
+xadmin = {file = "https://codeload.github.com/sshwsfc/xadmin/zip/django2"}
 
 [requires]
 python_version = "3.7"
