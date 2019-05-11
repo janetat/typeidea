@@ -11,6 +11,8 @@ django = "~=2.2"
 mistune = "*"
 django-autocomplete-light = "*"
 xadmin = {file = "https://codeload.github.com/sshwsfc/xadmin/zip/django2"}
+django-ckeditor = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"
