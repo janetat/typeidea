@@ -13,6 +13,8 @@ django-autocomplete-light = "*"
 xadmin = {file = "https://codeload.github.com/sshwsfc/xadmin/zip/django2"}
 django-ckeditor = "*"
 pillow = "*"
+django-rest-framework = "*"
+coreapi = "*"
 
 [requires]
 python_version = "3.7"
