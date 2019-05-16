@@ -15,6 +15,7 @@ django-ckeditor = "*"
 pillow = "*"
 django-rest-framework = "*"
 coreapi = "*"
+django-debug-toolbar = "*"
 
 [requires]
 python_version = "3.7"
