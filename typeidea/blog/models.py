@@ -1,6 +1,7 @@
 import mistune
 
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.db import models
 from django.utils.functional import cached_property
 
@@ -126,13 +127,19 @@ class Post(models.Model):
         return post_list, category
 
     @classmethod
-    def latest_posts(cls):
+    def latest_posts(cls, with_related=True):
         queryset = cls.objects.filter(status=cls.STATUS_NORMAL)
+        if with_related:
+            queryset = queryset.select_related('owner', 'category')
         return queryset
 
     @classmethod
     def hot_posts(cls):
-        return cls.objects.filter(status=cls.STATUS_NORMAL).order_by('-pv')
+        result = cache.get('hot_posts')
+        if not result:
+            result = cls.objects.filter(status=cls.STATUS_NORMAL).order_by('-pv')
+            cache.set('hot_posts', result, 10 * 60)
+        return result
 
     @cached_property
     def tags(self):

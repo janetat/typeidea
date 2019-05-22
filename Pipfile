@@ -5,6 +5,10 @@ verify_ssl = true
 
 [dev-packages]
 bpython = "*"
+django-debug-toolbar = "*"
+djdt-flamegraph = "*"
+pympler = "*"
+django-silk = "*"
 
 [packages]
 django = "~=2.2"
@@ -15,7 +19,8 @@ django-ckeditor = "*"
 pillow = "*"
 django-rest-framework = "*"
 coreapi = "*"
-django-debug-toolbar = "*"
+django-redis = "*"
+hiredis = "*"
 
 [requires]
 python_version = "3.7"
